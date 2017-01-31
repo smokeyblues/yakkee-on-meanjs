@@ -1,84 +1,201 @@
 <section>
-  <div class="jumbotron text-center">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-        <img alt="MEAN.JS" class="img-responsive text-center" src="/modules/core/client/img/brand/logo.png" />
+  <div ng-hide="hc.Auth.user" ng-init="hc.parallax()">
+    <div id="index-banner" class="parallax-container">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <br><br>
+          <h1 class="head header center teal-text text-darken-4 header-shadow outer-glow">Come Visit Your Friends!</h1>
+          <div class="row center">
+            <h5 class="slug header col s12 light dark-shadow">Anytime.<br>
+               Anywhere. <br>
+               From the comfort of your own home. <br>
+               </h5>
+          </div>
+          <div class="row center">
+            <a href="/signup" id="download-button" class="btn-large waves-effect waves-light teal lighten-1 margin-bottom">Get Started</a>
+          </div>
+          <br><br>
+
+        </div>
+      </div>
+      <div class="parallax main-pic"><img src="/images/77736736.jpg" alt="Unsplashed background img 1"></div>
+    </div>
+
+
+    <div class="container">
+      <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center brown-text"><i class="material-icons">person_pin</i></h2>
+              <h5 class="center">You Are Here</h5>
+
+              <p class="light">And your friends and family are there. <br><br> Wouldn't it be great if you could visit them whenever you wanted to? And not just talk on the phone or even a simple video chat but actually spend time with them. Play games, interact, enjoy each other's company like you are in the same room together. </p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+              <h5 class="center">Yakkee Exists to Erase Distance...</h5>
+
+              <p class="light">...between friends and family that aren't able to actually get together as much as they would like. Yakkee was designed to make it easy for people to spend time with friends and family residing in assisted-living facilities, hospitals and anywhere that risks leaving people feeling isolated and lonely.</p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center brown-text"><i class="material-icons">thumb_up</i></h2>
+              <h5 class="center">So easy to use</h5>
+
+              <p class="light">The Yakkee interface was designed to be easy to use, paying special attention to the needs of people that may not be comfortable with technology or may those that have disabilities. Our interface allows the user to speak commands, use gestures or use traditional the keyboard and mouse.</p>
+            </div>
+          </div>
+        </div>
+        <div class="parallax-container valign-wrapper">
+          <div class="section no-pad-bot">
+            <div class="container">
+              <div class="row center">
+                <h5 class="header col s12 light dark-shadow parallax-text" style="font-family: Oswald;">An app built to bring people together</h5>
+              </div>
+            </div>
+          </div>
+          <div class="parallax"><img class="responsive-img" src="/images/iStock_000029965210Medium-1.jpg" alt="Unsplashed background img 2"></div>
+        </div>
+
+        <div class="container">
+          <div class="section">
+
+            <div class="row">
+              <div class="col s12 center">
+                <h3><i class="mdi-content-send brown-text"></i></h3>
+                <h4>Contact Us</h4>
+                <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
-    <br>
-    <div class="row">
-      <p class="lead">
-        Open-Source Full-Stack Solution For MEAN Applications
-      </p>
-    </div>
-    <div class="row">
-      <p>
-        <a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>
-      </p>
+  </div>
+
+  <div class="container-fluid" ng-if="hc.Auth.user">
+
+    <div class="container full-height">
+      <div class="row">
+
+        <!-- search bar starts here -->
+        <div class="input-group" ng-hide="hc.loader">
+          <div class="col-xs-12" style="margin-top: 2em">
+            <h3 class="center-text" ng-if="!hc.search">{{hc.placeholder}}</h3>
+            <input class="form-control has-feedback col s12 font-size-2 center-text" autofocus type="text" ng-model="hc.search" placeholder="Search by name or email" ng-change="hc.figureOutItemsToDisplay()" />
+
+
+          </div>
+        </div>
+      </div>
+      <div class="row ng-hide" ng-show="hc.loader">
+        <h3 class="center-text center">Its Ringing...</h3>
+        <div class="mul6">
+            <div class="mul6_1"></div>
+            <div class="mul6_2"></div>
+          </div>
+      </div>
+      <div class="row" ng-show="!hc.loader">
+        <!-- Speech recognition starts here -->
+        <div class="col s12 center-text" ng-if="!hc.search" ng-click="hc.webSpeech();">
+              <i class="material-icons font-size-4 mic">keyboard_voice</i>
+        </div>
+      </div>
+
+      <!-- <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()" class="pagination">
+      </pagination> -->
+      <div class="list-group ng-hide" ng-show="hc.search" ng-if="!hc.loader" align="center">
+        <li ng-repeat="user in hc.pagedSearchItems" class="list-group-item" align="center">
+          <div class="card indigo lighten-5  m4 offset-m4">
+            <div class="row">
+              <div class="card-image waves-effect waves-block waves-light col s12 m6">
+              <img ng-src="{{user.profileImg}}" alt="{{user.firstName}} {{user.lastName}}" class="activator profile-img">
+            </div>
+            <div class="card-stacked col s12 m6">
+              <div class="card-content">
+                <h4>{{user.firstName}} {{user.lastName}}</h4>
+              </div>
+            </div>
+          </div>
+            <div class="card-content white">
+              <span class="card-title activator grey-text text-darken-4">Click for More<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title activator grey-text text-darken-4">{{user.firstName}} {{user.lastName}}<i class="material-icons right">close</i></span>
+              <div class="row">
+                <!-- /video-yak/{{hc.Auth.user._id}}_{{user._id}} -->
+                <a href="#">
+                  <div class="col s4 card-icon" ng-click="hc.sendInvite(user, hc.Auth.user)">
+                    <h3>Video Yak</h3>
+                    <i class="fa fa-video-camera fa-4x" aria-hidden="true"></i>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="col s4 card-icon">
+                    <h3 class="grey-text text-lighten-1">Phone Yak</h3>
+                    <i class="grey-text text-lighten-1 fa fa-phone fa-4x" aria-hidden="true"></i>
+                    <h5 class="grey-text text-darken-1">(Coming Soon!)</h5>
+                    <h6 class="grey-text text-darken-1">Subscription Feature</h6>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="col s4 card-icon">
+                    <h3 class="grey-text text-lighten-1">Message Yak</h3>
+                    <i class="grey-text text-lighten-1 fa fa-mobile fa-4x" aria-hidden="true"></i>
+                    <h5 class="grey-text text-darken-1">(Coming Soon!)</h5>
+                    <h6 class="grey-text text-darken-1">Subscription Feature</h6>
+                  </div>
+                </a>
+                <!-- <a href="#">
+                  <div class="btn btn-flat grey-text text-lighten-1 col s4 card-icon">
+                    <h3>Phone Yak</h3>
+                    <i class="fa fa-phone fa-4x" aria-hidden="true"></i>
+                  </div>
+                </a>
+                <div class="btn btn-flat grey-text text-lighten-1 col s4 card-icon">
+                  <h3>Yak</h3>
+                  <i class="fa fa-mobile fa-4x" aria-hidden="true"></i>
+                  <h3>Messenger</h3>
+                </div> -->
+              </div>
+            </div>
+
+          </div>
+
+        </li>
+      </div>
+
+      <div class="row">
+        <div class="col s12 m7">
+          <div class="card horizontal" ng-if="hc.inviteReceived" ng-model="hc.inviteData">
+            <div class="card-image">
+              <img ng-src="{{hc.invitation.sender.profileImg}}" alt="">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                {{hc.invitation.sender.firstName}} {{hc.invitation.sender.lastName}} has invited you to video chat. Would you like to accept {{hc.invitation.sender.firstName}}'s invitation?
+              </div>
+              <div class="card-action">
+                <button class="waves-effect waves-light btn-large white-text green" type="button" name="button" ng-click="hc.inviteAccepted(hc.invitation);">Yes</button>
+                <button class="waves-effect waves-light btn-large red" type="button" name="button" ng-click="hc.inviteDenied();">NO</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
-  <div>
-    <h2>Congrats! You've configured and run the sample application.</h2>
-    <p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
-    <p>This sample application tracks users and articles.</p>
-    <ul>
-      <li>
-        Click
-        <em>Sign Up</em> to get started.
-      </li>
-      <li>
-        Configure your app to work with your social accounts, by editing the
-        <em>/config/env/*.js</em> files.
-      </li>
-      <li>
-        Edit your users module.
-      </li>
-      <li>
-        Add new CRUD modules.
-      </li>
-      <li>
-        Have fun...
-      </li>
-    </ul>
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      <h2><strong>M</strong>ongoDB</h2>
-      <p><a target="_blank" href="http://mongodb.org/">MongoDB</a> is a NoSQL database. MongoDB's <a target="_blank" href="http://docs.mongodb.org/manual/">great manual</a> is the place to get started with NoSQL and MongoDB.</p>
-    </div>
-    <div class="col-md-3">
-      <h2><strong>E</strong>xpress</h2>
-      <p><a target="_blank" href="http://expressjs.com/"> Express</a> is a NodeJS server-side application web framework. Check out <a target="_blank" href="http://expressjs.com/4x/api.html">The ExpressJS API reference for more information</a> or <a target="_blank" href="http://stackoverflow.com/questions/8144214/learning-express-for-node-js">StackOverflow</a> for more info.</p>
-    </div>
-    <div class="col-md-3">
-      <h2><strong>A</strong>ngularJS</h2>
-      <p><a target="_blank" href="http://angularjs.org/">AngularJS</a> is client-side web application framework. The <a target="_blank" href="http://www.thinkster.io/">Thinkster Popular Guide</a> and <a target="_blank" href="https://egghead.io/">Egghead Videos</a> are great resources.</p>
-    </div>
-    <div class="col-md-3">
-      <h2><strong>N</strong>ode.js</h2>
-      <p><a target="_blank" href="http://nodejs.org/">Node.js</a> is a JavaScript run-time, popular for being a web server platform. Node's website and this <a target="_blank" href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">stackOverflow thread</a> offer excellent starting points to get to grasps with node.</p>
-    </div>
-  </div>
-  <div class="well">
-    <h2>MEAN.JS Documentation</h2>
-    <p>
-      Once you're familiar with the foundation technology, check out the MEAN.JS Documentation:
-      <ul>
-        <li><a target="_blank" href="http://meanjs.org/docs.html">MEAN.JS Documentation</a>
-        </li>
-        <!-- <li><a target="_blank" href="http://meanjs.org/generator.html">Yeoman Generator</a>
-				</li> -->
-        <li><a target="_blank" href="http://meanjs.org/modules.html">Modules</a>
-        </li>
-        <li><a target="_blank" href="http://meanjs.org/changelog.html">Changelog</a>
-        </li>
-        <li><a target="_blank" href="http://meanjs.org/community.html">Community</a>
-        </li>
-        <li><a target="_blank" href="http://blog.meanjs.org">Blog</a>
-        </li>
-      </ul>
-    </p>
-  </div>
-  <br>Enjoy &amp; Keep Us Updated,
-  <br>The MEAN.JS Team.
+
 </section>
